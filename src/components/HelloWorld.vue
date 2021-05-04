@@ -19,5 +19,5 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({}),
-}
+};
 </script>
