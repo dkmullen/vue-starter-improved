@@ -45,9 +45,6 @@ export default {
     store(e) {
       this.file = e;
     },
-    keepIt() {
-      console.log('pal');
-    },
     async upLoad() {
       if (this.file) {
         let f = new File(
