@@ -1,33 +1,38 @@
 <template>
-  <v-select
+  <v-checkbox
+    :rules="required ? requiredRule : []"
     :label="label"
-    :rules="required ? requiredRule : ''"
-    :items="items"
-    @input="updateValue"
+    @change="updateValue"
     :class="required ? 'required' : ''"
     v-bind="$attrs"
-    v-on="$listeners"
+    v-on="listeners"
     :value="value"
-    :tooltip="tooltip"
+    :id="id"
+    dense
   >
     <template v-slot:append-outer v-if="tooltip">
       <BaseTooltip :content="tooltip" />
     </template>
-  </v-select>
+  </v-checkbox>
 </template>
 
 <script>
 import { formFieldMixin } from '../../mixins/formFieldMixin';
 
 export default {
-  name: 'BaseSelect',
+  name: 'BaseCheckbox',
   mixins: [formFieldMixin],
-  props: {
-    items: {
-      type: Array,
-      required: true,
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue,
+      };
     },
+  },
+  props: {
     tooltip: { type: String, default: '' },
+    id: { type: String, default: '' },
   },
 };
 </script>

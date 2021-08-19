@@ -7,6 +7,8 @@
       :loading="loading"
       :success="success"
       :prepend-icon="success ? 'mdi-check-bold' : 'mdi-paperclip'"
+      :error="error"
+      :error-messages="errorMessage"
       small-chips
       truncate-length="15"
       accept=".pdf"
@@ -36,6 +38,8 @@ export default {
     return {
       loading: false,
       success: false,
+      error: false,
+      errorMessage: '',
       file: null,
       noRule: [],
     };
@@ -47,6 +51,7 @@ export default {
     },
     async upLoad() {
       if (this.file) {
+        this.$emit('status', { file: this.item.label, state: 'uploading' });
         let f = new File(
           [this.file],
           `${this.applicationNumber}_${this.file.name}`,
@@ -55,12 +60,23 @@ export default {
             lastModified: this.file.lastModified,
           }
         );
-        console.log(f);
         this.loading = true;
-        await this.submitFile(f);
-        this.loading = false;
-        this.success = true;
-        this.done = true;
+        const response = await this.submitFile({
+          file: f,
+          applicationNumber: this.applicationNumber,
+          name: this.item.name,
+        }).catch(() => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = 'Error uploading this file';
+          this.$emit('status', { file: this.item.label, state: 'error' });
+        });
+        if (response) {
+          this.loading = false;
+          this.success = true;
+          this.done = true;
+          this.$emit('status', { file: this.item.label, state: 'done' });
+        }
       }
     },
   },

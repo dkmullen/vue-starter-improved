@@ -40,7 +40,7 @@ export default {
         this.label = 'Back';
         break;
       case 'submit':
-        this.color = 'primary';
+        this.color = 'secondary';
         this.btnclass = 'left-btn';
         this.label = 'Submit';
         break;

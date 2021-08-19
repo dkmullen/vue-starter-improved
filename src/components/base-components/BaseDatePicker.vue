@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <label :for="id">{{ label }}</label>
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
@@ -11,13 +12,14 @@
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
           v-model="date"
-          :label="label"
           :rules="requiredRule"
           class="required"
-          prepend-icon="mdi-calendar"
+          prepend-inner-icon="mdi-calendar"
           readonly
           v-bind="attrs"
           v-on="on"
+          filled
+          :id="id"
         ></v-text-field>
       </template>
       <v-date-picker
@@ -34,7 +36,7 @@
 
 export default {
   name: 'DatePicker',
-  props: ['label'],
+  props: ['label', 'id'],
   data: () => ({
     valid: false,
     menu: false,

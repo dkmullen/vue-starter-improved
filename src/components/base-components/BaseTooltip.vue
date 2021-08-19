@@ -2,7 +2,13 @@
   <div>
     <v-menu top offset-y v-model="menu" :close-on-content-click="false">
       <template v-slot:activator="{ on, attrs }">
-        <v-icon v-bind="attrs" v-on="on" class="tt-icon">
+        <v-icon
+          v-bind="attrs"
+          v-on="on"
+          class="tt-icon"
+          role="button"
+          aria-label="More information"
+        >
           mdi-information
         </v-icon>
       </template>
@@ -18,8 +24,10 @@ export default {
     menu: false,
     lorem: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
         eiusmod tempor <b>incididunt ut labore</b> et dolore magna aliqua. Ut enim ad minim 
-        veniam, quis nostrud <a href="http://google.com" target="_blank">exercitation</a> ullamco`,
+        veniam, quis nostrud <a href="http://google.com" target="_blank" rel="noopener">
+        exercitation</a> ullamco.`,
   }),
+  methods: {},
 };
 </script>
 

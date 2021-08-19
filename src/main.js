@@ -10,9 +10,9 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
-// Makes a global component out of any in /components/shared named Base*.vue
+// Makes a global component out of any in /components/base-components named Base*.vue
 const requireComponent = require.context(
-  './components/shared',
+  './components/base-components',
   false,
   /Base[A-Z]\w+\.(vue|js)$/
 );
