@@ -2,7 +2,7 @@
   <v-container>
     <label :for="id">{{ label }}</label>
     <v-select
-      :rules="required ? requiredRule : ''"
+      :rules="required ? requiredRule : []"
       :items="items"
       @input="updateValue"
       :class="required ? 'required' : ''"
